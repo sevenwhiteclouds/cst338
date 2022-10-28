@@ -119,4 +119,14 @@ public class Book
     result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
     return result;
   }
+
+  /*
+   * This is the string representation of a Book object
+   * @return a string like [Title] by [Author] ISBN: [isbn]
+   */
+  @Override
+  public String toString()
+  {
+    return title + " by " + author + " ISBN: " + isbn;
+  }
 }
