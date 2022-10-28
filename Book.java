@@ -23,4 +23,100 @@ public class Book
   private int pageCount;
   private String author;
   private LocalDate dueDate;
+
+  public Book(String isbn, String title, String subject, int pageCount, String author, LocalDate dueDate)
+  {
+    this.isbn = isbn;
+    this.title = title;
+    this.subject = subject;
+    this.pageCount = pageCount;
+    this.author = author;
+    this.dueDate = dueDate;
+  }
+
+  public String getIsbn()
+  {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn)
+  {
+    this.isbn = isbn;
+  }
+
+  public String getTitle()
+  {
+    return title;
+  }
+
+  public void setTitle(String title)
+  {
+    this.title = title;
+  }
+
+  public String getSubject()
+  {
+    return subject;
+  }
+
+  public void setSubject(String subject)
+  {
+    this.subject = subject;
+  }
+
+  public int getPageCount()
+  {
+    return pageCount;
+  }
+
+  public void setPageCount(int pageCount)
+  {
+    this.pageCount = pageCount;
+  }
+
+  public String getAuthor()
+  {
+    return author;
+  }
+
+  public void setAuthor(String author)
+  {
+    this.author = author;
+  }
+
+  public LocalDate getDueDate()
+  {
+    return dueDate;
+  }
+
+  public void setDueDate(LocalDate dueDate)
+  {
+    this.dueDate = dueDate;
+  }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Book book = (Book) o;
+
+    if (getPageCount() != book.getPageCount()) return false;
+    if (getIsbn() != null ? !getIsbn().equals(book.getIsbn()) : book.getIsbn() != null) return false;
+    if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
+    if (getSubject() != null ? !getSubject().equals(book.getSubject()) : book.getSubject() != null) return false;
+    return getAuthor() != null ? getAuthor().equals(book.getAuthor()) : book.getAuthor() == null;
+  }
+
+  @Override
+  public int hashCode()
+  {
+    int result = getIsbn() != null ? getIsbn().hashCode() : 0;
+    result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+    result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
+    result = 31 * result + getPageCount();
+    result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
+    return result;
+  }
 }
