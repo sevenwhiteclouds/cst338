@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 
-public class Book
-{
+public class Book {
   /*
    * Author: Keldin Maldonado
    * Date: 2022 October 28
@@ -24,8 +23,7 @@ public class Book
   private String author;
   private LocalDate dueDate;
 
-  public Book(String isbn, String title, String subject, int pageCount, String author, LocalDate dueDate)
-  {
+  public Book(String isbn, String title, String subject, int pageCount, String author, LocalDate dueDate) {
     this.isbn = isbn;
     this.title = title;
     this.subject = subject;
@@ -34,69 +32,56 @@ public class Book
     this.dueDate = dueDate;
   }
 
-  public String getIsbn()
-  {
+  public String getIsbn() {
     return isbn;
   }
 
-  public void setIsbn(String isbn)
-  {
+  public void setIsbn(String isbn) {
     this.isbn = isbn;
   }
 
-  public String getTitle()
-  {
+  public String getTitle() {
     return title;
   }
 
-  public void setTitle(String title)
-  {
+  public void setTitle(String title) {
     this.title = title;
   }
 
-  public String getSubject()
-  {
+  public String getSubject() {
     return subject;
   }
 
-  public void setSubject(String subject)
-  {
+  public void setSubject(String subject) {
     this.subject = subject;
   }
 
-  public int getPageCount()
-  {
+  public int getPageCount() {
     return pageCount;
   }
 
-  public void setPageCount(int pageCount)
-  {
+  public void setPageCount(int pageCount) {
     this.pageCount = pageCount;
   }
 
-  public String getAuthor()
-  {
+  public String getAuthor() {
     return author;
   }
 
-  public void setAuthor(String author)
-  {
+  public void setAuthor(String author) {
     this.author = author;
   }
 
-  public LocalDate getDueDate()
-  {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(LocalDate dueDate)
-  {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
 
   @Override
-  public boolean equals(Object o)
-  {
+  public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
@@ -110,8 +95,7 @@ public class Book
   }
 
   @Override
-  public int hashCode()
-  {
+  public int hashCode() {
     int result = getIsbn() != null ? getIsbn().hashCode() : 0;
     result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
     result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
@@ -124,9 +108,9 @@ public class Book
    * This is the string representation of a Book object
    * @return a string like [Title] by [Author] ISBN: [isbn]
    */
+
   @Override
-  public String toString()
-  {
+  public String toString() {
     return title + " by " + author + " ISBN: " + isbn;
   }
 }

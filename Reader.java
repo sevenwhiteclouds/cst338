@@ -1,4 +1,3 @@
-public class Reader
-{
+public class Reader {
 
 }

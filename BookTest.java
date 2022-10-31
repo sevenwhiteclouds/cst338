@@ -6,27 +6,22 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-class BookTest
-{
+class BookTest {
   @BeforeEach
-  void setUp()
-  {
+  void setUp() {
 
   }
 
   @AfterEach
-  void tearDown()
-  {
+  void tearDown() {
 
   }
 
   @Test
-  void constructorTest()
-  {
+  void constructorTest() {
     Book book = null;
     assertNull(book);
-    book = new Book
-      (
+    book = new Book(
       "1337",
         "Headfirst Java",
         "education",
@@ -38,84 +33,72 @@ class BookTest
   }
 
   @Test
-  void getIsbn()
-  {
+  void getIsbn() {
 
   }
 
   @Test
-  void setIsbn()
-  {
+  void setIsbn() {
 
   }
 
   @Test
-  void getTitle()
-  {
+  void getTitle() {
 
   }
 
   @Test
-  void setTitle()
-  {
+  void setTitle() {
 
   }
 
   @Test
-  void getSubject()
-  {
+  void getSubject() {
 
   }
 
   @Test
-  void setSubject()
-  {
+  void setSubject() {
 
   }
 
   @Test
-  void getPageCount()
-  {
+  void getPageCount() {
 
   }
 
   @Test
-  void setPageCount()
-  {
+  void setPageCount() {
 
   }
 
   @Test
   void getAuthor() {
-  }
-
-  @Test
-  void setAuthor()
-  {
 
   }
 
   @Test
-  void getDueDate()
-  {
+  void setAuthor() {
 
   }
 
   @Test
-  void setDueDate()
-  {
+  void getDueDate() {
 
   }
 
   @Test
-  void testEquals()
-  {
+  void setDueDate() {
 
   }
 
   @Test
-  void testToString()
-  {
+  void testEquals() {
+
+  }
+
+  @Test
+  void testToString() {
 
   }
 }
