@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
+
   /*
    * Author: Keldin Maldonado
    * Date: 2022 November 1
@@ -26,69 +27,79 @@ public class Reader {
   private List<Book> books = new ArrayList<>();
 
   public Reader(int cardNumber, String name, String phone) {
+
     this.cardNumber = cardNumber;
     this.name = name;
     this.phone = phone;
   }
 
   public void setCardNumber(int cardNumber) {
+
     this.cardNumber = cardNumber;
   }
 
   public void setName(String name) {
+
     this.name = name;
   }
 
   public void setPhone(String phone) {
+
     this.phone = phone;
   }
 
   public void setBooks(List<Book> books) {
+
     this.books = books;
   }
 
   public int getCardNumber() {
+
     return cardNumber;
   }
 
   public String getName() {
+
     return name;
   }
 
   public String getPhone() {
+
     return phone;
   }
 
   public List<Book> getBooks() {
+
     return books;
   }
 
   public int getBookCount() {
+
     return books.size();
   }
 
-  public String addBook(Book newBook) {
+  public Code addBook(Book newBook) {
 
     if (hasBook(newBook)) {
-     return "Code.BOOK_ALREADY_CHECK_OUT_ERROR";
+      return Code.BOOK_ALREADY_CHECKED_OUT_ERROR;
     }
     else {
       books.add(newBook);
-      return "Code.SUCCESS";
+      return Code.SUCCESS;
     }
   }
 
-  public String removeBook(Book removeThis) {
+  public Code removeBook(Book removeThis) {
 
     if (hasBook(removeThis)) {
       books.remove(removeThis);
-      return "Code.SUCCESS";
+      return Code.SUCCESS;
     }
     else if (!hasBook(removeThis)) {
-      return "Code.READER_DOESNT_HAVE_BOOK_ERROR";
+      return Code.READER_DOESNT_HAVE_BOOK_ERROR;
     }
     else {
-      return "Code.READER_COULD_NOT_REMOVE_BOOK_ERROR";
+      return Code.READER_COULD_NOT_REMOVE_BOOK_ERROR;
     }
   }
 
@@ -108,11 +119,13 @@ public class Reader {
 
   @Override
   public String toString() {
+
     return name + " (#" + cardNumber + ")" + " has checked out " + books;
   }
 
   @Override
   public boolean equals(Object o) {
+
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
@@ -125,6 +138,7 @@ public class Reader {
 
   @Override
   public int hashCode() {
+
     int result = getCardNumber();
     result = 31 * result + (getName() != null ? getName().hashCode() : 0);
     result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);

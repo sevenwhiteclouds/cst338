@@ -52,10 +52,13 @@ class ReaderTest {
 
   @AfterEach
   void tearDown() {
+
     System.out.println("done\n");
   }
 
-  @Test void constructorTest() {
+  @Test
+  void constructorTest() {
+
     Reader testReaderTwo = new Reader(testCardNumber, testName, testPhone);
     assertNotNull(testReaderTwo);
 
@@ -66,9 +69,9 @@ class ReaderTest {
   void addBook() {
 
     assertEquals(0, testReader.getBookCount());
-    assertEquals("Code.SUCCESS", testReader.addBook(testBook));
-    assertEquals("Code.BOOK_ALREADY_CHECK_OUT_ERROR", testReader.addBook(testBook));
-    assertEquals("Code.SUCCESS", testReader.addBook(testBookTwo));
+    assertEquals(Code.SUCCESS, testReader.addBook(testBook));
+    assertEquals(Code.BOOK_ALREADY_CHECKED_OUT_ERROR, testReader.addBook(testBook));
+    assertEquals(Code.SUCCESS, testReader.addBook(testBookTwo));
     assertEquals(2, testReader.getBookCount());
 
     System.out.println("add book passed");
@@ -95,7 +98,7 @@ class ReaderTest {
     testReader.removeBook(testBook);
     assertFalse(testReader.hasBook(testBook));
 
-    assertEquals("Code.READER_DOESNT_HAVE_BOOK_ERROR", testReader.removeBook(testBook));
+    assertEquals(Code.READER_DOESNT_HAVE_BOOK_ERROR, testReader.removeBook(testBook));
 
     System.out.println("remove book passed");
   }
@@ -190,5 +193,40 @@ class ReaderTest {
     assertEquals(1, testReader.getBookCount());
 
     System.out.println("set books passed");
+  }
+
+  @Test
+  void testToString() {
+
+    testReader.addBook(testBook);
+    testReader.addBook(testBookTwo);
+
+    assertEquals("Bob Barker (#2187) has checked out " +
+      "[Headfirst Java by Grady Booch, ISBN: 1337, " +
+      "Dune by Frank Herbert ISBN: 34-w-34]", testReader.toString());
+
+    System.out.println("to string test passed");
+  }
+
+  @Test
+  void testEquals() {
+
+    Reader testReaderTwo = new Reader(initCardNumber, initName, initPhone);
+
+    assertTrue(testReader.equals(testReaderTwo));
+
+    System.out.println("equals test passed");
+  }
+
+  @Test
+  void testHashCode() {
+
+    Reader testReaderTwo = new Reader(testCardNumber, initName, initPhone);
+    assertNotEquals(testReaderTwo.hashCode(), testReader.hashCode());
+
+    testReaderTwo.setCardNumber(initCardNumber);
+    assertEquals(testReaderTwo.hashCode(), testReader.hashCode());
+
+    System.out.println("hash code passed");
   }
 }
