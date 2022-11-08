@@ -1,7 +1,6 @@
 package project_01;
 
 import java.util.HashMap;
-import java.util.stream.Stream;
 
 public class Shelf {
   public static final int SHELF_NUMBER_ = 0;
@@ -21,7 +20,7 @@ public class Shelf {
     //return "books on shelf: " + getSelfNumber() + " : " + getSubject() + "\n" +
 
 
-    }
+    return "work in progress..";
   }
 
   public Code removeBook(Book book) {
