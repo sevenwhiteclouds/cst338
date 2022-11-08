@@ -1,3 +1,8 @@
+/*
+ * this will be removed later
+ * this is only required when inside this folder
+ * TODO: turned in assignment without this
+ */
 package project_01;
 
 import java.util.HashMap;
