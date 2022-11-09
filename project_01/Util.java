@@ -1,3 +1,5 @@
+package project_01;
+
 import javax.imageio.IIOException;
 import java.io.File;
 import java.io.FileWriter;

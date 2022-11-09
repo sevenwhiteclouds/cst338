@@ -1,3 +1,4 @@
+package project_01;
 
 import javax.imageio.IIOException;
 import java.io.File;
