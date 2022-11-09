@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Shelf {
   public static final int SHELF_NUMBER_ = 0;
-  public static final int SUBJECT_ = 2;
+  public static final int SUBJECT_ = 1;
 
   private int shelfNumber;
   private String subject;
