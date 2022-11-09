@@ -10,6 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ShelfTest {
 
+  /*
+   * Author: Keldin Maldonado
+   * Date: 2022 November 7
+   * Abstract: This is the test for third part of project 1.
+   * This is testing to make sure that every part of the creation of
+   * shelves is working correctly.
+   */
+
   // info to populate shelf one
   private final int shelfNum1 = 1;
   private final String shelfSub1 = "sci-fi";

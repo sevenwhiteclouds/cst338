@@ -1,7 +1,6 @@
 /*
  * this will be removed later
  * this is only required when inside this folder
- * TODO: turned in assignment without this
  * check the warning thing
  */
 package project_01;
@@ -9,6 +8,14 @@ package project_01;
 import java.util.*;
 
 public class Shelf {
+  /*
+   * Author: Keldin Maldonado
+   * Date: 2022 November 7
+   * Abstract: This is the third part of project 1.
+   * This is the source code for the creation of the shelves part
+   * of the library we are building.
+   */
+
   public static final int SHELF_NUMBER_ = 0;
   public static final int SUBJECT_ = 1;
 
