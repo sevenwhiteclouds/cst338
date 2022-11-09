@@ -42,23 +42,72 @@ class ShelfTest {
 
   @BeforeEach
   void setUp() {
+    System.out.println("Starting test...");
     shelfOne = new Shelf(shelfNum1, shelfSub1);
   }
 
   @AfterEach
   void tearDown() {
-
+    System.out.println("done.\n");
   }
 
-  // TODO: this test is not implemented right
   @Test
   void listBooks() {
-
+    // setting all books to the same subject
     book2.setSubject(sub1);
+
+    // adding all the books to the shelf
+    shelfOne.addBook(book2);
+    shelfOne.addBook(book2);
     shelfOne.addBook(book2);
     shelfOne.addBook(book1);
+    shelfOne.addBook(book1);
+
+    assertEquals("5 books on shelf: 1 : sci-fi\n" +
+      "Dune by Frank Herbert ISBN: 34-w-34 2\n" +
+      "Headfirst Java by Grady Booch ISBN: 1337 3", shelfOne.listBooks());
 
     System.out.println("list books: PASSED");
+  }
+
+  @Test
+  void constructorTest() {
+    Shelf constructorTest = new Shelf(shelfNum2, shelfSub2);
+    assertNotEquals(null, constructorTest);
+    assertEquals(shelfSub2, constructorTest.getSubject());
+    assertEquals(shelfNum2, constructorTest.getShelfNumber());
+
+    System.out.println("constructor test: PASSED");
+  }
+
+  @Test
+  void equalsTest() {
+    // shelf two has the same values as shelf one
+    Shelf shelfTwo = new Shelf(shelfNum1, shelfSub1);
+    // shelf three has different values than shelf one
+    Shelf shelfThree = new Shelf(shelfNum2, shelfSub2);
+
+    assertTrue(shelfOne.equals(shelfTwo));
+    assertFalse(shelfOne.equals(shelfThree));
+    System.out.println("equals: PASSED");
+  }
+
+  @Test
+  void hashCodeTest() {
+    // shelf two has the same values as shelf one
+    Shelf shelfTwo = new Shelf(shelfNum1, shelfSub1);
+    // shelf three has different values than shelf one
+    Shelf shelfThree = new Shelf(shelfNum2, shelfSub2);
+
+    assertEquals(shelfOne.hashCode(), shelfTwo.hashCode());
+    assertNotEquals(shelfOne.hashCode(), shelfThree.hashCode());
+    System.out.println("hash code: PASSED");
+  }
+
+  @Test
+  void toStringTest() {
+   assertEquals("1 : sci-fi", shelfOne.toString());
+   System.out.println("to string: PASSED");
   }
 
   @Test
@@ -93,14 +142,67 @@ class ShelfTest {
   }
   @Test
   void getBookCount() {
+    shelfOne.addBook(book1);
+    assertEquals(1, shelfOne.getBookCount(book1));
     System.out.println("get book count: PASSED");
   }
 
   @Test
-  void getSelfNumber() {
+  void getShelfNumber() {
+    assertEquals(shelfNum1, shelfOne.getShelfNumber());
+
+    System.out.println("get shelf number: PASSED");
   }
 
   @Test
   void getSubject() {
+    assertEquals(shelfSub1, shelfOne.getSubject());
+
+    System.out.println("get subject number: PASSED");
+  }
+
+  @Test
+  void getBooks() {
+    Shelf shelfTwo = new Shelf(shelfNum1, sub1);
+    assertEquals(shelfTwo.getBooks(), shelfOne.getBooks());
+
+    shelfOne.addBook(book1);
+
+    assertNotEquals(shelfTwo.getBooks(), shelfOne.getBooks());
+
+    System.out.println("get books: PASSED");
+  }
+
+  @Test
+  void setBooksTest() {
+    Shelf shelfTwo = new Shelf(shelfNum1, sub1);
+    shelfOne.addBook(book1);
+
+    assertNotEquals(shelfOne.getBooks(), shelfTwo.getBooks());
+
+    shelfTwo.setBooks(shelfOne.getBooks());
+    assertEquals(shelfOne.getBooks(), shelfTwo.getBooks());
+
+    System.out.println("set books: PASSED");
+  }
+
+  @Test
+  void setSubject () {
+    assertEquals(shelfSub1, shelfOne.getSubject());
+    shelfOne.setSubject(shelfSub2);
+
+    assertEquals(shelfSub2, shelfOne.getSubject());
+
+    System.out.println("set subject: PASSED");
+  }
+
+  @Test
+  void setShelfNum () {
+    assertEquals(shelfNum1, shelfOne.getShelfNumber());
+    shelfOne.setShelfNumber(shelfNum2);
+
+    assertEquals(shelfNum2, shelfOne.getShelfNumber());
+
+    System.out.println("set shelf num: PASSED");
   }
 }

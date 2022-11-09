@@ -2,31 +2,43 @@
  * this will be removed later
  * this is only required when inside this folder
  * TODO: turned in assignment without this
+ * check the warning thing
  */
 package project_01;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Shelf {
   public static final int SHELF_NUMBER_ = 0;
-  public static final int SUBJECT_ = 0;
+  public static final int SUBJECT_ = 2;
 
-  private int selfNumber;
+  private int shelfNumber;
   private String subject;
   private HashMap<Book, Integer> books = new HashMap<>();
 
-  public Shelf(int selfNumber, String subject) {
-    this.selfNumber = selfNumber;
+  public Shelf(int shelfNumber, String subject) {
+    this.shelfNumber = shelfNumber;
     this.subject = subject;
   }
 
-  // TODO: perhaps this has to work with the string function that i have not implemented
   public String listBooks() {
-    //return "books on shelf: " + getSelfNumber() + " : " + getSubject() + "\n" +
+    String fullBook = "";
+    int totalBooks = 0;
 
+    // I need to capture all keys to figure out how many of those books exist
+    // also keeping track of the total count of keys aka books
+    for (Book key : books.keySet()) {
+      totalBooks += getBookCount(key);
 
-    return "work in progress..";
+      fullBook += key.toString() + " " + getBookCount(key) + "\n";
+    }
+
+    // removing the last \n aka new line that was added from loop above
+    fullBook = fullBook.substring(0, fullBook.length() - 1);
+
+    return totalBooks + " books on shelf: " + this + "\n" + fullBook;
   }
+
 
   public Code removeBook(Book book) {
     if (!books.containsKey(book)) {
@@ -49,10 +61,10 @@ public class Shelf {
   }
 
   public Code addBook(Book book) {
-    if (!books.containsKey(book) && book.getSubject() != subject) {
+    if (!books.containsKey(book) && !book.getSubject().equals(subject)) {
       return Code.SHELF_SUBJECT_MISMATCH_ERROR;
     }
-    else if (!books.containsKey(book) && book.getSubject() == subject) {
+    else if (!books.containsKey(book) && book.getSubject().equals(subject)) {
       books.put(book, 1);
       return Code.SUCCESS;
     }
@@ -65,12 +77,14 @@ public class Shelf {
     }
   }
 
+
+
   public int getBookCount(Book book) {
     return books.getOrDefault(book, -1);
   }
 
-  public int getSelfNumber() {
-    return selfNumber;
+  public int getShelfNumber() {
+    return shelfNumber;
   }
 
   public String getSubject() {
@@ -85,11 +99,34 @@ public class Shelf {
     this.books = books;
   }
 
-  public void setSelfNumber(int selfNumber) {
-    this.selfNumber = selfNumber;
+  public void setShelfNumber(int shelfNumber) {
+    this.shelfNumber = shelfNumber;
   }
 
   public void setSubject(String subject) {
     this.subject = subject;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Shelf shelf = (Shelf) o;
+
+    if (getShelfNumber() != shelf.getShelfNumber()) return false;
+    return getSubject() != null ? getSubject().equals(shelf.getSubject()) : shelf.getSubject() == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = getShelfNumber();
+    result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return shelfNumber + " : " + subject;
   }
 }
