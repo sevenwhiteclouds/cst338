@@ -10,3 +10,4 @@
 /out/
 /*.class
 .DS_Store
+*.iml
