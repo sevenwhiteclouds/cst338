@@ -1,7 +1,3 @@
-// this is only needed if it's inside the homework folder
-// turned in the assignment without this
-package homeworks;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;

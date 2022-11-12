@@ -1,10 +1,3 @@
-/*
- * this will be removed later
- * this is only required when inside this folder
- * check the warning thing
- */
-package project_01;
-
 import java.util.*;
 
 public class Shelf {

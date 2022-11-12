@@ -1,5 +1,3 @@
-package project_01;
-
 public enum Code {
     /**
      * The following codes are returned based on condition in the library project.

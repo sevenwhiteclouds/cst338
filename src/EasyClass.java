@@ -1,7 +1,3 @@
-// this is only needed if it's inside the homework folder
-// turned in the assignment without this
-package homeworks;
-
 public class EasyClass {
 
   /*

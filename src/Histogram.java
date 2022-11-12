@@ -1,9 +1,3 @@
-/*
- * remove this before turning in
- * does not read in the files because is in a "package"
- */
-package homeworks;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;

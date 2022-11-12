@@ -1,7 +1,3 @@
-// only required when inside folder with this name
-// turned in without this
-package project_01;
-
 import java.time.LocalDate;
 
 public class Book {
