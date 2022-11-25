@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.imageio.IIOException;
 import java.io.File;
 import java.io.FileWriter;

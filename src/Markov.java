@@ -21,6 +21,8 @@ public class Markov {
 
   void addLine(String line) {
     if (!line.isEmpty()) {
+      // cleaning the read in string and only leaving a space to then split
+      // the string at that point and easily store it in an array of strings
       line = line.replaceAll("\n", "");
       line = line.replaceAll("\t", "");
       line = line.stripLeading();
@@ -81,6 +83,10 @@ public class Markov {
         finalString += currentWord + " ";
         currentWord = randomWord(currentWord);
       }
+
+      // this last if before the loop is checked for another go around
+      // makes sure that the newly selected word in the previous if
+      // statement does not end in a period
       if (endsWithPunctuation(currentWord)) {
         finalString += currentWord;
       }
@@ -93,6 +99,8 @@ public class Markov {
   String randomWord(String word) {
     Random random = new Random();
 
+    // the random object gets the next int within 0 and the size
+    // of the word being passed in. all done in one single line
     return words.get(word).get(random.nextInt(0, words.get(word).size()));
   }
 
