@@ -77,31 +77,39 @@ public class Library {
     }
 
     // remember the amount of books in the csv file is stored in index 0 of array
-    initBooks(array[0], scanner);
+    System.out.println(initBooks(array[0], scanner));
     listBooks();
 
-    initShelves(array[1], scanner);
-    listShelves(false);
+    System.out.println();
+    System.out.println(initShelves(array[1], scanner));
+    listShelves(true);
 
     initReader(array[2], scanner);
-//    listReaders();
+    listReaders();
 
 
     return Code.SUCCESS;
   }
 
   public Code listShelves(boolean showbooks) {
-    if (showbooks) {
-      for (String key : shelves.keySet()) {
-        listBooks();
+    for (String shelfKey : shelves.keySet()) {
+      int total = 0;
+
+      for (Book bookKey : shelves.get(shelfKey).getBooks().keySet()) {
+        total += shelves.get(shelfKey).getBookCount(bookKey);
       }
-    }
-    // if this causes problems, just use a separate if instead of this
-    else {
-      for (String key : shelves.keySet()) {
-        System.out.println(shelves.get(key).toString());
+
+      System.out.print(total + " books on shelf " + shelves.get(shelfKey).toString() + "\n");
+
+      // this is the part that prints all the books
+      if (showbooks) {
+        for (Book bookKey : shelves.get(shelfKey).getBooks().keySet()) {
+          System.out.println(bookKey.getTitle() + " by " + bookKey.getAuthor() + " ISBN:" + bookKey.getIsbn() + " " + shelves.get(shelfKey).getBookCount(bookKey));
+        }
+
+        System.out.println();
       }
-    }
+  }
 
     return Code.SUCCESS;
   }
@@ -156,8 +164,9 @@ public class Library {
     boolean yes = false;
 
     for (int i = 0; i < readers.size(); i++) {
-      if (readers.get(i).getPhone().equals(reader.getPhone())) {
+      if (readers.get(i).equals(reader)) {
         yes = true;
+        break;
       }
     }
 
@@ -261,6 +270,8 @@ public class Library {
       return Code.SHELF_COUNT_ERROR;
     }
 
+    System.out.println("parsing " + shelfCount + " shelves");
+
     // this skips the first line that contains the amount of shelves
     scan.hasNextLine();
     scan.nextLine();
@@ -269,6 +280,17 @@ public class Library {
     for (int i = 0; i < shelfCount; i++) {
       scan.hasNextLine();
       String[] shelfSplit = scan.nextLine().split(",");
+
+      System.out.print("Parsing Shelf: ");
+      for (int j = 0; j < shelfSplit.length; j++) {
+        System.out.print(shelfSplit[j]);
+
+        if (j < shelfSplit.length - 1) {
+          System.out.print(",");
+        }
+      }
+
+      System.out.println();
 
       int convertShelfNum = convertInt(shelfSplit[0], Code.SHELF_COUNT_ERROR);
 
@@ -295,28 +317,16 @@ public class Library {
       return Code.SHELF_EXISTS_ERROR;
     }
 
-    // to keep track of what the largest number in the hashmap is
-    int largestNumber = 0;
-
-    for (int i = 0; i < shelves.size(); i++) {
-      int temp = 0;
-
-      if (shelves.get(i) != null) {
-        temp = shelves.get(i).getShelfNumber();
-      }
-
-      if (temp > largestNumber) {
-        largestNumber = temp;
-      }
-    }
-
-    shelf.setShelfNumber(largestNumber+1);
+    shelf.setShelfNumber(shelves.size()+1);
 
     shelves.put(shelf.getSubject(), shelf);
 
     for (Book key : books.keySet()) {
       if (key.getSubject().equals(shelf.getSubject())) {
-        shelves.get(shelf.getSubject()).addBook(key);
+        for (int i = 0; i < books.get(key); i++) {
+          shelves.get(shelf.getSubject()).addBook(key);
+          System.out.println(key.getTitle() +  " by " + key.getAuthor() + " ISBN:" + key.getIsbn() + " added to shelf " + shelf);
+        }
       }
     }
 
@@ -336,6 +346,7 @@ public class Library {
       return Code.LIBRARY_ERROR;
     }
 
+    System.out.println("parsing " + bookCount + " books");
     // this skips the first line that contains the amount of books
     scan.hasNextLine();
     scan.nextLine();
@@ -343,6 +354,17 @@ public class Library {
     for (int i = 0; i < bookCount; i++) {
       scan.hasNextLine();
       String[] bookSplit = scan.nextLine().split(",");
+
+      System.out.print("parsing book: ");
+      for (int j = 0; j < bookSplit.length; j++) {
+        System.out.print(bookSplit[j]);
+
+        if (j < bookSplit.length - 1) {
+          System.out.print(",");
+        }
+      }
+
+      System.out.println();
 
       int convertedPageC = convertInt(bookSplit[3], Code.PAGE_COUNT_ERROR);
       LocalDate convertedDueDate = convertDate(bookSplit[5], Code.DUE_DATE_ERROR);
@@ -381,7 +403,7 @@ public class Library {
     }
 
     for (int i = 0; i < readers.size(); i++) {
-      System.out.println(readers.get(i).getName() + "(#" + readers.get(i).getCardNumber() + ") has the following books:\n");
+      System.out.println(readers.get(i).getName() + "(#" + readers.get(i).getCardNumber() + ") has the following books:");
       System.out.println(readers.get(i).getBooks());
     }
 
@@ -530,12 +552,12 @@ public class Library {
    public Code addBook(Book newBook) {
     if (books.containsKey(newBook)) {
        books.replace(newBook, books.get(newBook) + 1);
-       System.out.println(books.get(newBook) + " copies of " + newBook.getTitle() + " in the stacks.");
+       System.out.println(books.get(newBook) + " copies of " + newBook.getTitle() + " by " + newBook.getAuthor() + " ISBN:" + newBook.getIsbn() + " in the stacks.");
     }
 
     if (!books.containsKey(newBook)) {
       books.put(newBook, 1);
-      System.out.println(newBook.getTitle() + " added to the stacks.");
+      System.out.println(newBook.getTitle() + " by " + newBook.getAuthor() + " ISBN:" + newBook.getIsbn() + " added to the stacks.");
     }
 
     if (!shelves.containsKey(newBook.getSubject())) {

@@ -1,3 +1,4 @@
+import org.w3c.dom.ls.LSOutput;
 
 import javax.imageio.IIOException;
 import java.io.File;
@@ -12,12 +13,6 @@ public class Main {
 
         Library csumb = new Library("CSUMB");
         csumb.init("Library01.csv");
-
-        Book removeBook = csumb.getBookByISBN("42-w-87");
-
-        csumb.checkOutBook(csumb.getReaderByCard(1), removeBook);
-        csumb.checkOutBook(csumb.getReaderByCard(1), removeBook);
-
         int numb = csumb.listBooks();
         System.out.println("total books: " + numb);
         numb = csumb.listReaders();
