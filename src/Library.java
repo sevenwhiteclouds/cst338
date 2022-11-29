@@ -60,7 +60,7 @@ public class Library {
       String temp = scanner.nextLine();
 
       if (temp.length() == 1) {
-        // updating the counter so i know where store the data in the array
+        // updating the counter so i know where to store the data in the array
         counter++;
         // updating the error code so i know what error code to send
         errorCodeCounter = errorCodeCounter+2;
@@ -100,7 +100,6 @@ public class Library {
 
       System.out.print(total + " books on shelf " + shelves.get(shelfKey).toString() + "\n");
 
-      // this is the part that prints all the books
       if (showbooks) {
         for (Book bookKey : shelves.get(shelfKey).getBooks().keySet()) {
           System.out.println(bookKey.getTitle() + " by " + bookKey.getAuthor() + " ISBN:" + bookKey.getIsbn() + " " + shelves.get(shelfKey).getBookCount(bookKey));
@@ -108,7 +107,7 @@ public class Library {
 
         System.out.println();
       }
-  }
+    }
 
     return Code.SUCCESS;
   }
@@ -128,7 +127,7 @@ public class Library {
 
       int convertCardNum = convertInt(readerSplit[0], Code.READER_CARD_NUMBER_ERROR);
 
-      // i need to know how many books the user has to be added to the account. need in to use...
+      // i need to know how many books the user has to be added to the account. need int to use...
       int howManyBooks = convertInt(readerSplit[3], Code.BOOK_COUNT_ERROR);
 
       Reader reader = new Reader(convertCardNum, readerSplit[1], readerSplit[2]);
@@ -154,8 +153,6 @@ public class Library {
 
         startPoint = startPoint +2;
       }
-
-
     }
 
     return Code.SUCCESS;
@@ -274,7 +271,6 @@ public class Library {
     // this skips the first line that contains the amount of shelves
     scan.hasNextLine();
     scan.nextLine();
-
 
     for (int i = 0; i < shelfCount; i++) {
       scan.hasNextLine();
@@ -514,10 +510,10 @@ public class Library {
       }
     }
 
-     if (returnedBook == null) {
-       System.out.println("ERROR: Could not find a book with isbn: " + isbn);
-       return null;
-     }
+    if (returnedBook == null) {
+      System.out.println("ERROR: Could not find a book with isbn: " + isbn);
+      return null;
+    }
 
     return returnedBook;
   }
@@ -545,12 +541,13 @@ public class Library {
       System.out.println(books.get(key) + " copies of " + key);
       total += books.get(key);
     }
+
     System.out.println();
 
     return total;
   }
 
-   public Code addBook(Book newBook) {
+  public Code addBook(Book newBook) {
     if (books.containsKey(newBook)) {
        books.replace(newBook, books.get(newBook) + 1);
        System.out.println(books.get(newBook) + " copies of " + newBook.getTitle() + " by " + newBook.getAuthor() + " ISBN:" + newBook.getIsbn() + " in the stacks.");
