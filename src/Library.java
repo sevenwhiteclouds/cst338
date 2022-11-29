@@ -1,3 +1,5 @@
+import org.junit.jupiter.params.provider.CsvSource;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -80,11 +82,10 @@ public class Library {
     System.out.println(initBooks(array[0], scanner));
     listBooks();
 
-    System.out.println();
     System.out.println(initShelves(array[1], scanner));
     listShelves(true);
 
-    initReader(array[2], scanner);
+    System.out.println(initReader(array[2], scanner));
     listReaders();
 
 
@@ -129,32 +130,34 @@ public class Library {
 
       int convertCardNum = convertInt(readerSplit[0], Code.READER_CARD_NUMBER_ERROR);
 
+      // i need to know how many books the user has to be added to the account. need in to use...
+      int howManyBooks = convertInt(readerSplit[3], Code.BOOK_COUNT_ERROR);
+
       Reader reader = new Reader(convertCardNum, readerSplit[1], readerSplit[2]);
+
+      // this is the starting point where the first book from the reader read in is at
+      int startPoint = 4;
 
       addReader(reader);
 
-      // i don't know where the reader is at in the arraylist of readers finding it and saving it
-      int readerPositionInLibrary = 0;
+      for (int j = 0; j < howManyBooks; j++) {
+        Book bookToAdd = getBookByISBN(readerSplit[startPoint]);
 
-      for (int j = 0; j < readers.size(); j++) {
-        if (readers.get(j).equals(reader)) {
-          readerPositionInLibrary = j;
-          break;
+        LocalDate updateDate = convertDate(readerSplit[startPoint+1], Code.DATE_CONVERSION_ERROR);
+
+        bookToAdd.setDueDate(updateDate);
+
+        if (bookToAdd == null) {
+          System.out.println("ERROR");
         }
+        else {
+          System.out.println(checkOutBook(reader, bookToAdd));
+        }
+
+        startPoint = startPoint +2;
       }
 
-      if (reader.getBookCount() != 0) {
-        for (int k = 0; k < reader.getBooks().size(); k++) {
-          String readersBookIsbn = reader.getBooks().get(k).getIsbn();
 
-          if (getBookByISBN(readersBookIsbn) == null) {
-            System.out.println("ERROR");
-          }
-          else {
-            readers.get(readerPositionInLibrary).addBook(reader.getBooks().get(k));
-          }
-        }
-      }
     }
 
     return Code.SUCCESS;
@@ -231,13 +234,11 @@ public class Library {
       }
     }
 
-    Code removeBookFromShelf = shelves.get(book.getSubject()).removeBook(book);
-
-    if (removeBookFromShelf == Code.SUCCESS) {
+    if (shelves.get(book.getSubject()).removeBook(book) == Code.SUCCESS) {
       System.out.println(book + " checked out successfully");
     }
 
-    return removeBookFromShelf;
+    return Code.SUCCESS;
   }
 
   public Code removeReader(Reader reader) {
@@ -467,6 +468,7 @@ public class Library {
     }
 
     shelves.get(book.getSubject()).addBook(book);
+    System.out.println(book.getTitle() + " by " + book.getAuthor() + " ISBN:" + book.getIsbn() + " added to shelf " + shelves.get(book.getSubject()));
 
     return Code.SUCCESS;
   }
@@ -545,6 +547,7 @@ public class Library {
       System.out.println(books.get(key) + " copies of " + key);
       total += books.get(key);
     }
+    System.out.println();
 
     return total;
   }

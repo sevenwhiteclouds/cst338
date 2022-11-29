@@ -52,7 +52,7 @@ public class Shelf {
     else if (books.containsKey(book) && getBookCount(book) != -1) {
       books.replace(book, books.get(book) - 1);
 
-      System.out.println(book.getTitle() + " successfully removed from shelf " + getSubject());
+      System.out.println(book + " successfully removed from shelf " + getSubject());
       return Code.SUCCESS;
     }
     else {
