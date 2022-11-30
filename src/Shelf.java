@@ -45,11 +45,11 @@ public class Shelf {
       System.out.println(book.getTitle() + " is not on shelf " + getSubject());
       return Code.BOOK_NOT_IN_INVENTORY_ERROR;
     }
-    else if (books.containsKey(book) && getBookCount(book) == -1) {
+    else if (books.containsKey(book) && getBookCount(book) == 0) {
       System.out.println("No copies of " + book.getTitle() + " remain on shelf " + getSubject());
       return Code.BOOK_NOT_IN_INVENTORY_ERROR;
     }
-    else if (books.containsKey(book) && getBookCount(book) != -1) {
+    else if (books.containsKey(book) && getBookCount(book) > 0) {
       books.replace(book, books.get(book) - 1);
 
       System.out.println(book + " successfully removed from shelf " + getSubject());

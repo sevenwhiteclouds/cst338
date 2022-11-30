@@ -436,7 +436,7 @@ public class Library {
     }
 
     if (!readers.get(foundYou).getBooks().contains(book)) {
-      System.out.println(reader.getName() + " doesn't have " + book.getTitle() + " checked out");
+      System.out.println(reader.getName() + " doesn't have " + book + " checked out");
       return Code.READER_DOESNT_HAVE_BOOK_ERROR;
     }
 
