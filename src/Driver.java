@@ -3,6 +3,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Driver {
+  /*
+   * Author: Keldin Maldonado
+   * Date: 2022 - 11 - 29
+   * Abstract: This class is part of a document code along for week 5 homework.
+   * This is the driver code.
+   */
+
   public static void main(String[] args) {
     HashMap<String, Integer> items = new HashMap<>();
     items.put("gold", 5);

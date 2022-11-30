@@ -1,6 +1,14 @@
 import java.util.HashMap;
 
 public class Monster {
+  /*
+   * Author: Keldin Maldonado
+   * Date: 2022 - 11 - 29
+   * Abstract: This class is part of a document code along for week 5 homework.
+   * This is a parent class "Monster" from which the other classes in this project inherit from.
+   * When called, the toString prints out the current health
+   */
+
   private Integer hp;
   private Integer xp = 10;
   private Integer maxHP;
