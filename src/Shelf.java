@@ -66,10 +66,12 @@ public class Shelf {
     }
     else if (!books.containsKey(book) && book.getSubject().equals(subject)) {
       books.put(book, 1);
+      System.out.println(book + "added to shelf " + this.toString());
       return Code.SUCCESS;
     }
     else if (books.containsKey(book)) {
       books.replace(book, books.get(book) + 1);
+      System.out.println(book + "added to shelf " + this.toString());
       return Code.SUCCESS;
     }
     else {

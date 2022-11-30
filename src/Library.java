@@ -320,7 +320,6 @@ public class Library {
       if (key.getSubject().equals(shelf.getSubject())) {
         for (int i = 0; i < books.get(key); i++) {
           shelves.get(shelf.getSubject()).addBook(key);
-          System.out.println(key.getTitle() +  " by " + key.getAuthor() + " ISBN:" + key.getIsbn() + " added to shelf " + shelf);
         }
       }
     }
@@ -462,7 +461,6 @@ public class Library {
     }
 
     shelves.get(book.getSubject()).addBook(book);
-    System.out.println(book.getTitle() + " by " + book.getAuthor() + " ISBN:" + book.getIsbn() + " added to shelf " + shelves.get(book.getSubject()));
 
     return Code.SUCCESS;
   }
