@@ -1,14 +1,23 @@
+package Monsters;
+
+import Abilities.Attack;
+
 import java.util.HashMap;
+import java.util.Random;
 
 public class Monster {
   /*
    * Author: Keldin Maldonado
    * Date: 2022 - 11 - 29
    * Abstract: This class is part of a document code along for week 5 homework.
-   * This is a parent class "Monster" from which the other classes in this project inherit from.
+   * This is a parent class "Monsters.Monster" from which the other classes in this project inherit from.
    * When called, the toString prints out the current health
    */
 
+  Integer agi = 10;
+  Integer def = 10;
+  Integer str = 10;
+  Attack attack;
   private Integer hp;
   private Integer xp = 10;
   private Integer maxHP;
@@ -19,6 +28,66 @@ public class Monster {
     hp = this.maxHP;
     this.xp = xp;
     this.items = items;
+  }
+
+  Integer getAttribute(Integer min, Integer max) {
+    Random rand = new Random();
+
+    if (min > max) {
+      Integer temp = min;
+      min = max;
+      max = temp;
+    }
+
+    return rand.nextInt(max-min) + min;
+  }
+
+  boolean takeDamage(Integer damage) {
+    if (damage > 0) {
+      if (getHp() > 0) {
+        setHp(getHp() - damage);
+      }
+    }
+
+    if (getHp() > 0) {
+      System.out.println("The creature was hit for " + damage + " damage");
+    }
+    else {
+      System.out.println("Oh no! the creator has perished");
+    }
+
+    System.out.println(this.toString());
+
+    if (getHp() > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public Integer attackTarget(Monster monster) {
+    Integer returnedValue;
+
+    monster.takeDamage(returnedValue = attack.attack(monster));
+
+    return returnedValue;
+  }
+
+  public Integer getAgi() {
+    return agi;
+  }
+
+
+  public Integer getDef() {
+    return def;
+  }
+
+  public Integer getStr() {
+    return str;
+  }
+
+  public Attack getAttack() {
+    return attack;
   }
 
   public Integer getHp() {
